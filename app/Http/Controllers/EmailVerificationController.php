@@ -12,6 +12,10 @@ class EmailVerificationController extends Controller
     {
         $member = Member::findOrFail($id);
 
+        if($member->token_created_at == null) {
+            return view('email-verification-failed', ['id' => $id]);
+        }
+
         // Get the token_created_at time from your model
         $tokenCreatedAt = Carbon::parse($member->token_created_at);
 
@@ -31,7 +35,8 @@ class EmailVerificationController extends Controller
     {
         $member->update([
             'email_verified_at' => Carbon::now(),
-            'token' => null
+            'token' => null,
+            'token_created_at' => null
         ]);
     }
 }
