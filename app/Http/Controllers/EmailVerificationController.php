@@ -18,12 +18,13 @@ class EmailVerificationController extends Controller
         // Calculate the difference in days
         $secondsDifference = $tokenCreatedAt->diffInSeconds(Carbon::now());
 
-        // Check if the token is at most 2 days old
-        if ($secondsDifference <= 60) {
-            $this->verified($member);
-            return view('email-verified');
+        // Check if the token is at least 120 seconds old and is same as hash
+        if ($secondsDifference > 120 || $hash != $member->token) {
+            return view('email-verification-failed', ['id' => $id]);
         }
-        return view('email-verification-failed', ['id' => $id]);
+        
+        $this->verified($member);
+        return view('email-verified');
     }
 
     public function verified($member)
