@@ -7,6 +7,38 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Build Steps
+
+1. Project setup
+```sh
+git clone https://github.com/laraib07/laravel-custom-email-verification.git
+
+cd laravel-custom-email-verification
+
+composer install
+
+npm install
+
+php artisan migrate
+```
+2. Setting up google smtp server and put you Email ID and Smtp generated password int the `.env` file
+```
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=`YOUR EMAIL ID`
+MAIL_PASSWORD=`YOUR GENERATED PASSWORD (NOT YOUR EMAIL ID PASSWORD)`
+MAIL_ENCRYPTION=tls
+```
+3. Start the server
+```sh
+php artisan serve
+```
+```sh
+npm run dev
+```
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
